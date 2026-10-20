@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Pulse · Weight Dashboard</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="w">
+      <header>
+        <div class="lg"><i></i>PULSE</div>
+        <div class="hb">
+          <button class="bt s" id="bd">Data</button
+          ><button class="bt" id="bl">+ Log day</button>
+        </div>
+      </header>
+      <section class="hero">
+        <div class="cd">
+          <span class="lb">Current weight</span>
+          <div class="bw"><span id="bw">--.-</span><small>kg</small></div>
+          <small id="sb"></small>
+          <div style="margin-top: 20px">
+            <div class="gt">
+              <span id="gx">Set a goal weight</span><span id="gp"></span>
+            </div>
+            <div class="pg"><i id="pf"></i></div>
+            <div class="gi">
+              <input
+                id="gv"
+                inputmode="decimal"
+                placeholder="Goal weight, kg"
+              /><button class="bt s" id="gb">Set</button>
+            </div>
+          </div>
+        </div>
+        <div class="cmp" id="cmp"></div>
+      </section>
+      <div class="cd" style="--n: 5; margin-bottom: 14px">
+        <div class="hd">
+          <h2>Weight curve</h2>
+          <div class="tb" id="rg">
+            <button data-r="30">30D</button
+            ><button data-r="90" class="on">90D</button
+            ><button data-r="0">All</button>
+          </div>
+        </div>
+        <div id="ch"></div>
+      </div>
+      <div class="cd" style="--n: 6; margin-bottom: 14px">
+        <div class="hd">
+          <h2>Consistency map <small id="hc"></small></h2>
+          <div class="tb" id="hmode">
+            <button data-m="a" class="on">Activity</button
+            ><button data-m="w">Weight trend</button>
+          </div>
+        </div>
+        <div class="hs">
+          <div class="hi">
+            <div class="ml" id="ml"></div>
+            <div class="hm" id="hm"></div>
+          </div>
+        </div>
+        <div class="lgd" id="lgd"></div>
+        <div class="dy" id="dy"></div>
+      </div>
+      <section class="r2">
+        <div class="cd" style="--n: 7">
+          <div class="hd">
+            <h2>Weekly volume</h2>
+            <div class="tb" id="mt">
+              <button data-k="k" class="on">km</button
+              ><button data-k="c">kcal</button><button data-k="t">min</button
+              ><button data-k="n">sessions</button>
+            </div>
+          </div>
+          <small id="bn"></small>
+          <div class="bs" id="bs2"></div>
+        </div>
+        <div class="cd" style="--n: 8">
+          <div class="hd"><h2>Records &amp; streaks</h2></div>
+          <div class="st" id="st"></div>
+        </div>
+      </section>
+    </div>
+    <div class="md" id="fm">
+      <div class="mc">
+        <h2>Log a day</h2>
+        <small>Leave the session fields empty for a weigh-in only.</small>
+        <div class="fg">
+          <div>
+            <label>Date</label
+            ><input
+              id="fd"
+              inputmode="numeric"
+              placeholder="dd/mm/yyyy"
+              maxlength="10"
+            />
+          </div>
+          <div>
+            <label>Time (mm:ss)</label><input id="ft" placeholder="29:00" />
+          </div>
+          <div>
+            <label>Calories</label
+            ><input id="fc" inputmode="decimal" placeholder="121.5" />
+          </div>
+          <div>
+            <label>Distance (km)</label
+            ><input id="fk" inputmode="decimal" placeholder="2.64" />
+          </div>
+          <div>
+            <label>Speed (km/h)</label
+            ><input id="fs" inputmode="decimal" placeholder="5.5" />
+          </div>
+          <div>
+            <label>Incline</label
+            ><input id="fi" inputmode="numeric" placeholder="1" />
+          </div>
+          <div class="fw">
+            <label>Weight (kg)</label
+            ><input id="fw" inputmode="decimal" placeholder="120.2" />
+          </div>
+        </div>
+        <div class="er" id="er"></div>
+        <div class="hb" style="justify-content: flex-end">
+          <button class="bt s" id="fx">Cancel</button
+          ><button class="bt" id="fz">Save</button>
+        </div>
+      </div>
+    </div>
+    <div class="md" id="dm">
+      <div class="mc">
+        <h2>Your data</h2>
+        <small
+          >Stored only in this browser. Copy it as a backup, or paste a backup
+          here and import.</small
+        >
+        <textarea id="dt" spellcheck="false"></textarea>
+        <div class="hb" style="flex-wrap: wrap; margin-top: 12px">
+          <button class="bt s" id="dc">Copy</button
+          ><button class="bt s" id="di">Import</button
+          ><button class="bt s" id="dd">Load demo</button
+          ><button class="bt s" id="dx">Clear all</button
+          ><button class="bt" id="dz">Close</button>
+        </div>
+      </div>
+    </div>
+    <div class="ts" id="ts"></div>
+    <script src="app.js"></script>
+  </body>
+</html>
