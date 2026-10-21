@@ -2,6 +2,8 @@
 
 A static, dark-mode weight and workout dashboard. Log a day in the form and the dashboard updates its charts instantly.
 
+**Live demo:** https://davidbitner.github.io/weight/
+
 ## Features
 
 - Log form with Brazilian date format (dd/mm/yyyy), time (mm:ss), calories, distance, speed, incline and weight
