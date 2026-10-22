@@ -7,6 +7,8 @@
       content="width=device-width, initial-scale=1, viewport-fit=cover"
     />
     <title>Pulse · Weight Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg" />
+    <meta name="theme-color" content="#0a0c11" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link
       href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&display=swap"
@@ -140,19 +142,22 @@
       <div class="mc">
         <h2>Your data</h2>
         <small
-          >Stored only in this browser. Copy it as a backup, or paste a backup
-          here and import.</small
+          >Stored only in this browser. Export a .txt backup, import one back,
+          or paste a backup here and import.</small
         >
         <textarea id="dt" spellcheck="false"></textarea>
         <div class="hb" style="flex-wrap: wrap; margin-top: 12px">
           <button class="bt s" id="dc">Copy</button
           ><button class="bt s" id="di">Import</button
+          ><button class="bt s" id="dex">Export .txt</button
+          ><button class="bt s" id="dim">Import .txt</button
           ><button class="bt s" id="dd">Load demo</button
           ><button class="bt s" id="dx">Clear all</button
           ><button class="bt" id="dz">Close</button>
         </div>
       </div>
     </div>
+    <input type="file" id="df" accept=".txt,.json,text/plain" hidden />
     <div class="ts" id="ts"></div>
     <script src="app.js"></script>
   </body>

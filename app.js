@@ -548,24 +548,32 @@ $("#bd").onclick = () => {
 };
 $("#dz").onclick = () => op("#dm", 0);
 $("#dc").onclick = async () => {
-  const v = $("#dt").value;
+  const v = $("#dt").value || JSON.stringify(D);
   try {
     await navigator.clipboard.writeText(v);
   } catch (e) {
+    $("#dt").value = v;
     $("#dt").select();
     document.execCommand("copy");
   }
   toast("Copied");
 };
+function readBackup(text) {
+  const raw = JSON.parse(text);
+  const a = Array.isArray(raw) ? raw : raw && raw.data;
+  if (
+    !Array.isArray(a) ||
+    !a.every((e) => /^\d{4}-\d\d-\d\d$/.test(e.d) && e.w > 0)
+  )
+    throw 0;
+  const g = Array.isArray(raw) ? null : num(raw.goal);
+  return { data: a.map(norm), goal: g > 20 && g < 400 ? g : null };
+}
 $("#di").onclick = () => {
   try {
-    const a = JSON.parse($("#dt").value);
-    if (
-      !Array.isArray(a) ||
-      !a.every((e) => /^\d{4}-\d\d-\d\d$/.test(e.d) && e.w > 0)
-    )
-      throw 0;
-    D = a.map(norm);
+    const b = readBackup($("#dt").value);
+    D = b.data;
+    if (b.goal) goal = b.goal;
     save();
     op("#dm", 0);
     sel = null;
@@ -573,6 +581,40 @@ $("#di").onclick = () => {
     toast("Imported " + D.length + " days");
   } catch (e) {
     toast("That does not look like a valid backup");
+  }
+};
+$("#dex").onclick = () => {
+  if (!D.length) return toast("Nothing to export yet");
+  const blob = new Blob([JSON.stringify({ app: "pulse", goal, data: D })], {
+    type: "text/plain",
+  });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(blob);
+  a.download = "pulse-backup-" + today() + ".txt";
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast("Exported " + D.length + " days");
+};
+$("#dim").onclick = () => $("#df").click();
+$("#df").onchange = async (e) => {
+  const f = e.target.files[0];
+  e.target.value = "";
+  if (!f) return;
+  try {
+    const b = readBackup(await f.text());
+    const m = new Map(D.map((x) => [x.d, x]));
+    b.data.forEach((x) => m.set(x.d, x));
+    D = [...m.values()];
+    if (b.goal) goal = b.goal;
+    save();
+    op("#dm", 0);
+    sel = null;
+    render();
+    toast("Imported " + b.data.length + " days from " + f.name);
+  } catch (err) {
+    toast("That file is not a valid backup");
   }
 };
 arm($("#dd"), () => {
