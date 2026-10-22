@@ -2,7 +2,7 @@
 
 A static, dark-mode weight and workout dashboard. Log a day in the form and the dashboard updates its charts instantly.
 
-**Live demo:** https://davidbitner.github.io/weight/
+**Live demo:** https://davidbitner.github.io/pulse/
 
 ## Features
 
