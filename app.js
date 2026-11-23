@@ -530,7 +530,34 @@ $("#fd").oninput = (e) => {
   e.target.value = v;
 };
 $("#ft").oninput = (e) => {
-  e.target.value = e.target.value.replace(/[^\d:]/g, "");
+  const val = e.target.value;
+  if (val.includes(":")) {
+    const parts = val.split(":");
+    let mm, ss;
+    if (parts.length === 3) {
+      mm = String(
+        +parts[0].replace(/\D/g, "") * 60 +
+          (+parts[1].replace(/\D/g, "") || 0),
+      );
+      ss = parts[2].replace(/\D/g, "").slice(0, 2);
+    } else {
+      mm = parts[0].replace(/\D/g, "").slice(0, 3);
+      ss = parts.slice(1).join("").replace(/\D/g, "").slice(0, 2);
+    }
+    e.target.value = mm + ":" + ss;
+  } else {
+    const digits = val.replace(/\D/g, "").slice(0, 4);
+    if (digits.length > 2) {
+      e.target.value = digits.slice(0, 2) + ":" + digits.slice(2);
+    } else {
+      e.target.value = digits;
+    }
+  }
+};
+$("#ft").onblur = (e) => {
+  const v = e.target.value.trim();
+  if (/^\d{1,3}$/.test(v)) e.target.value = v + ":00";
+  else if (/^\d{1,3}:$/.test(v)) e.target.value = v + "00";
 };
 $("#gb").onclick = () => {
   const v = num($("#gv").value);
